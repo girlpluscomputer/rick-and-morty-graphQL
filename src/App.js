@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Button from "./components/Button";
+import Character from "./components/Character";
+import image from "./img/rick-and-morty.png";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      data: {}
+    };
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <img src={image} alt="h" width="200" />
+        <h2 className="title">Character generator</h2>
+        <Character />
+        <Button />
+      </div>
+    );
+  }
 }
 
 export default App;
