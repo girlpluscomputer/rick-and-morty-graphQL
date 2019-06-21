@@ -13,7 +13,7 @@ const RoundButton = styled.button`
   cursor: pointer;
 `;
 
-function Button({ handleclick }) {
-  return <RoundButton onClick={handleclick}>Generate</RoundButton>;
+function Button({ fetchCharacters }) {
+  return <RoundButton onClick={fetchCharacters}>Generate</RoundButton>;
 }
 export default Button;

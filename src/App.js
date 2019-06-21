@@ -9,11 +9,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      nextPage: 1,
       loading: true,
       error: null,
       data: {
-        results: []
+        origin: {},
+        location: {}
       }
     };
   }
@@ -21,23 +21,26 @@ class App extends Component {
     this.fetchCharacters();
   }
 
+  randomCharacter = () => {
+    return Math.floor(Math.random() * (493 - 1) + 1);
+  };
+
   fetchCharacters = async () => {
     this.setState({ loading: true, error: null });
 
+    const random = this.randomCharacter();
+
     try {
       const response = await fetch(
-        `https://rickandmortyapi.com/api/character?page=${this.state.nextPage}`
+        `https://rickandmortyapi.com/api/character/${random}`
       );
+
       const data = await response.json();
-      this.setState({
-        data: {
-          info: data.info,
-          results: [].concat(this.state.data.results, data.results)
-        },
-        loading: false,
-        nextPage: this.state.nextPage + 1
-      });
       // console.log(data);
+      this.setState({
+        data: data,
+        loading: false
+      });
     } catch (error) {
       this.setState({
         loading: false,
@@ -49,15 +52,32 @@ class App extends Component {
 
   handleclick = e => {
     console.log("Clicked");
-    // console.log(this.state.data.results.length);
   };
+
   render() {
+    const {
+      id,
+      image,
+      name,
+      status,
+      species,
+      location,
+      origin
+    } = this.state.data;
     return (
       <div className="App">
         <img src={logo} alt="logo" width="250" />
         <h2 className="title">Character generator</h2>
-        <Character />
-        <Button handleclick={this.handleclick} />
+        <Character
+          id={id}
+          image={image}
+          name={name}
+          status={status}
+          species={species}
+          location={location.name}
+          origin={origin.name}
+        />
+        <Button fetchCharacters={this.fetchCharacters} />
       </div>
     );
   }
