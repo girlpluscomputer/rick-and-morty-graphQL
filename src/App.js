@@ -1,12 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+
 import Button from "./components/Button";
 import Character from "./components/Character";
-import logo from "./img/rick-and-morty.png";
+import Logo from "./img/rick-and-morty.png";
+import HistorialButton from "./img/history-solid.svg";
+import PageLoading from "./components/PageLoading";
+import Historial from "./components/Historial";
 
 import "./App.css";
 
 class App extends Component {
   state = {
+    show: false,
     loading: true,
     error: null,
     character: {
@@ -24,6 +29,13 @@ class App extends Component {
     return Math.floor(Math.random() * (493 - 1) + 1);
   };
 
+  handleHistorial = e => {
+    const { show } = this.state;
+    this.setState({
+      show: !show
+    });
+  };
+
   fetchCharacters = async () => {
     const random = this.randomCharacter();
 
@@ -33,10 +45,15 @@ class App extends Component {
       );
 
       const character = await response.json();
-      // console.log(character);
 
-      const { characters } = this.state;
-      const charactersList = [...characters, character];
+      const characters = this.state.characters;
+      let charactersList = [];
+
+      //Valida que el personaje no exista en la lista de personajes
+
+      if (!characters.hasOwnProperty(character)) {
+        charactersList = [...characters, character];
+      }
 
       this.setState({
         character: character,
@@ -52,20 +69,30 @@ class App extends Component {
     }
   };
 
-  handleclick = e => {
-    console.log("Clicked");
-  };
-
   render() {
-    const { character } = this.state;
-    return (
-      <div className="App">
-        <img src={logo} alt="logo" width="250" />
-        <h2 className="title">Character generator</h2>
-        <Character {...character} />
+    const { character, loading, show, characters } = this.state;
 
-        <Button fetchCharacters={this.fetchCharacters} />
-      </div>
+    if (loading) {
+      return <PageLoading />;
+    }
+
+    return (
+      <Fragment>
+        <div className="App">
+          <img src={Logo} alt="logo" width="250" />
+          <h2 className="title">Character generator</h2>
+          <button className="historial-button" onClick={this.handleHistorial}>
+            <img alt="history button" src={HistorialButton} width="28px" />
+          </button>
+          <Character {...character} />
+          <Button fetchCharacters={this.fetchCharacters} />
+        </div>
+        <Historial
+          show={show}
+          characters={characters}
+          handleHistorial={this.handleHistorial}
+        />
+      </Fragment>
     );
   }
 }
