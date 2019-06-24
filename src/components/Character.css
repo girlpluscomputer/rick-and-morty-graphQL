@@ -29,8 +29,10 @@
   padding: 32px;
   background-color: #fff;
   font-size: 12px;
+  border-radius: 16px;
 }
 .data {
+  max-width: 100%;
   font-weight: normal;
   background-color: #fff;
 }

@@ -27,11 +27,11 @@ function Character({ id, image, name, status, species, origin, location }) {
           </div>
           <div className="character-origin item">
             <label className="label">Origin: </label>
-            <h3 className="data">{origin}</h3>
+            <h3 className="data">{origin.name}</h3>
           </div>
           <div className="character-last-location item">
             <label className="label">Location: </label>
-            <h3 className="data">{location}</h3>
+            <h3 className="data">{location.name}</h3>
           </div>
         </div>
       </div>

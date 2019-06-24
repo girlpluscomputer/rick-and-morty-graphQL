@@ -6,17 +6,16 @@ import logo from "./img/rick-and-morty.png";
 import "./App.css";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: true,
-      error: null,
-      data: {
-        origin: {},
-        location: {}
-      }
-    };
-  }
+  state = {
+    loading: true,
+    error: null,
+    character: {
+      origin: {},
+      location: {}
+    },
+    characters: []
+  };
+
   componentDidMount() {
     this.fetchCharacters();
   }
@@ -26,8 +25,6 @@ class App extends Component {
   };
 
   fetchCharacters = async () => {
-    this.setState({ loading: true, error: null });
-
     const random = this.randomCharacter();
 
     try {
@@ -35,16 +32,21 @@ class App extends Component {
         `https://rickandmortyapi.com/api/character/${random}`
       );
 
-      const data = await response.json();
-      // console.log(data);
+      const character = await response.json();
+      // console.log(character);
+
+      const { characters } = this.state;
+      const charactersList = [...characters, character];
+
       this.setState({
-        data: data,
-        loading: false
+        character: character,
+        loading: false,
+        characters: charactersList
       });
     } catch (error) {
       this.setState({
         loading: false,
-        error: error
+        error
       });
       console.log(error);
     }
@@ -55,28 +57,13 @@ class App extends Component {
   };
 
   render() {
-    const {
-      id,
-      image,
-      name,
-      status,
-      species,
-      location,
-      origin
-    } = this.state.data;
+    const { character } = this.state;
     return (
       <div className="App">
         <img src={logo} alt="logo" width="250" />
         <h2 className="title">Character generator</h2>
-        <Character
-          id={id}
-          image={image}
-          name={name}
-          status={status}
-          species={species}
-          location={location.name}
-          origin={origin.name}
-        />
+        <Character {...character} />
+
         <Button fetchCharacters={this.fetchCharacters} />
       </div>
     );
