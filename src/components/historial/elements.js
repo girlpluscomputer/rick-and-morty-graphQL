@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+import styled from "styled-components";
 
-.historial-container {
+const HistorialContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -9,9 +9,9 @@
   background-color: rgba(0, 0, 0, 0.5);
   font-family: "Roboto", sans-serif;
   font-size: 14px;
-}
+`;
 
-.historial-sidebar {
+const HistorialSidebar = styled.div`
   position: fixed;
   top: 0;
   left: 100vh - 360px;
@@ -19,34 +19,44 @@
   right: 0;
   width: 460px;
   background-color: #fff;
-  /* display: flex;
-  flex-direction: column; */
-  /* justify-items: center; */
-}
-.historial-content {
+`;
+
+const HistorialContent = styled.div`
   padding: 20px 60px;
   background-color: #fff;
   height: 100vh;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-}
-.button-container {
+`;
+
+const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
   background-color: #fff;
-}
-.historial-close-button {
+`;
+
+const HistorialCloseButton = styled.button`
   border: none;
   padding: 0 16px;
   height: 36px;
   font-weight: bold;
   color: tomato;
   background-color: #fff;
-}
-.historial-item {
+`;
+
+const HistorialItem = styled.div`
   background-color: #fff;
   padding: 10px 0;
   text-align: end;
-}
+`;
+
+export {
+  HistorialContainer,
+  HistorialSidebar,
+  HistorialContent,
+  ButtonContainer,
+  HistorialCloseButton,
+  HistorialItem
+};
