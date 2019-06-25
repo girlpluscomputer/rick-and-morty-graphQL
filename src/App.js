@@ -3,7 +3,7 @@ import Button from "./components/button";
 import Character from "./components/character";
 import Logo from "./img/rick-and-morty.png";
 import historialButtonImg from "./img/history-solid.svg";
-import PageLoading from "./components/PageLoading";
+import PageLoading from "./components/pageloading";
 import Historial from "./components/historial";
 import { MainContainer, HistorialButton, Title } from "./elements";
 
