@@ -1,100 +1,109 @@
-import React, { Component, Fragment } from "react";
-
-import Button from "./components/Button";
-import Character from "./components/Character";
-import Logo from "./img/rick-and-morty.png";
-import HistorialButton from "./img/history-solid.svg";
-import PageLoading from "./components/PageLoading";
-import Historial from "./components/Historial";
-
-import "./App.css";
+import React, { Component, Fragment } from 'react';
+import Button from './components/button';
+import Character from './components/character';
+import Logo from './img/rick-and-morty.png';
+import historialButtonImg from './img/history-solid.svg';
+import PageLoading from './components/PageLoading';
+import Historial from './components/Historial';
+import { MainContainer, HistorialButton, Title } from './elements';
 
 class App extends Component {
-  state = {
-    show: false,
-    loading: true,
-    error: null,
-    character: {
-      origin: {},
-      location: {}
-    },
-    characters: []
-  };
+	state = {
+		show: false,
+		loading: false,
+		error: null,
+		character: {},
+		characters: []
+	};
 
-  componentDidMount() {
-    this.fetchCharacters();
-  }
+	componentDidMount() {
+		this.fetchCharacters();
+	}
 
-  randomCharacter = () => {
-    return Math.floor(Math.random() * (493 - 1) + 1);
-  };
+	componentDidUpdate = (prevProps, prevState) => {
+		const { character } = this.state;
+		if (prevState.character !== character) {
+			console.log('Character changed');
+		}
+	};
 
-  handleHistorial = e => {
-    const { show } = this.state;
-    this.setState({
-      show: !show
-    });
-  };
+	randomCharacter = () => {
+		return Math.floor(Math.random() * (493 - 1) + 1);
+	};
 
-  fetchCharacters = async () => {
-    const random = this.randomCharacter();
+	handleHistorial = e => {
+		const { show } = this.state;
+		this.setState({
+			show: !show
+		});
+	};
 
-    try {
-      const response = await fetch(
-        `https://rickandmortyapi.com/api/character/${random}`
-      );
+	fetchCharacters = async () => {
+		const { characters: charactersState } = this.state;
+		const random = this.randomCharacter();
 
-      const character = await response.json();
+		this.setState({ loading: true });
 
-      const characters = this.state.characters;
-      let charactersList = [];
+		try {
+			const response = await fetch(
+				`https://rickandmortyapi.com/api/character/${random}`
+			);
 
-      //Valida que el personaje no exista en la lista de personajes
+			const character = await response.json();
+			let characters = [...charactersState];
 
-      if (!characters.hasOwnProperty(character)) {
-        charactersList = [...characters, character];
-      }
+			if (!charactersState.find(chara => chara.id === character.id)) {
+				characters = [...charactersState, character];
+			}
+			//Valida que el personaje no exista en la lista de personajes
 
-      this.setState({
-        character: character,
-        loading: false,
-        characters: charactersList
-      });
-    } catch (error) {
-      this.setState({
-        loading: false,
-        error
-      });
-      console.log(error);
-    }
-  };
+			this.setState({
+				character: character,
+				characters
+			});
+		} catch (error) {
+			this.setState({
+				error
+			});
+		} finally {
+			this.setState({
+				loading: false
+			});
+		}
+	};
 
-  render() {
-    const { character, loading, show, characters } = this.state;
+	render() {
+		const { character, loading, show, characters } = this.state;
 
-    if (loading) {
-      return <PageLoading />;
-    }
-
-    return (
-      <Fragment>
-        <div className="App">
-          <img src={Logo} alt="logo" width="250" />
-          <h2 className="title">Character generator</h2>
-          <button className="historial-button" onClick={this.handleHistorial}>
-            <img alt="history button" src={HistorialButton} width="28px" />
-          </button>
-          <Character {...character} />
-          <Button fetchCharacters={this.fetchCharacters} />
-        </div>
-        <Historial
-          show={show}
-          characters={characters}
-          handleHistorial={this.handleHistorial}
-        />
-      </Fragment>
-    );
-  }
+		return (
+			<Fragment>
+				{loading ? (
+					<PageLoading />
+				) : (
+					<Fragment>
+						<MainContainer>
+							<img src={Logo} alt="logo" width="250" />
+							<Title>Character generator</Title>
+							<HistorialButton onClick={this.handleHistorial}>
+								<img
+									alt="history button"
+									src={historialButtonImg}
+									width="28px"
+								/>
+							</HistorialButton>
+							<Character character={character} />
+							<Button onClick={this.fetchCharacters}>Generate</Button>
+						</MainContainer>
+						<Historial
+							show={show}
+							characters={characters}
+							handleHistorial={this.handleHistorial}
+						/>
+					</Fragment>
+				)}
+			</Fragment>
+		);
+	}
 }
 
 export default App;

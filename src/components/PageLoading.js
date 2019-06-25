@@ -1,13 +1,19 @@
-import React from "react";
-import Loader from "./Loader";
-import "./PageLoading.css";
+import React from 'react';
+import styled from 'styled-components';
+import Loader from './Loader';
+
+const PageLoadingContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-content: center;
+`;
 
 const PageLoading = () => {
-  return (
-    <div className="page-loading">
-      <Loader />
-    </div>
-  );
+	return (
+		<PageLoadingContainer>
+			<Loader />
+		</PageLoadingContainer>
+	);
 };
 
 export default PageLoading;
