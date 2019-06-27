@@ -12,12 +12,7 @@ import {
 const Character = ({ character }) => (
   <CharacterContainer>
     <CharacterCard id={character.id}>
-      <CharacterImage
-        alt="character"
-        src={character.image}
-        width="300"
-        height="300"
-      />
+      <CharacterImage alt="character" src={character.image} />
       <CharacterDescription>
         <Item className="character-name item">
           <Label>Name: </Label>

@@ -16,13 +16,13 @@ const CharacterCard = styled.div`
   border-radius: 16px;
   display: flex;
   flex-direction: row;
-
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 `;
 
 const CharacterImage = styled.img`
   border-bottom-left-radius: 16px;
   border-top-left-radius: 16px;
+  width: 300px;
 `;
 
 const CharacterDescription = styled.div`
