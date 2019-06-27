@@ -6,6 +6,8 @@ import historialButtonImg from "./img/history-solid.svg";
 import PageLoading from "./components/pageloading";
 import Historial from "./components/historial";
 import { MainContainer, HistorialButton, Title } from "./elements";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
 class App extends Component {
   state = {
@@ -13,23 +15,84 @@ class App extends Component {
     loading: false,
     error: null,
     character: {},
-    characters: []
-  };
-
-  componentDidMount() {
-    this.fetchCharacters();
-  }
-
-  componentDidUpdate = (prevProps, prevState) => {
-    const { character } = this.state;
-    if (prevState.character !== character) {
-      console.log("Character changed");
-    }
+    characters: [],
+    query: gql`
+      {
+        character(id: 0) {
+          id
+          name
+          image
+          status
+          species
+          location {
+            name
+          }
+          origin {
+            name
+          }
+        }
+      }
+    `
   };
 
   randomCharacter = () => {
     return Math.floor(Math.random() * (493 - 1) + 1);
   };
+
+  componentDidMount() {
+    const query = gql`
+    {
+      character(id: ${this.randomCharacter()}) {
+        id
+        name
+        image
+        status
+        species
+        location {
+          name
+        }
+        origin {
+          name
+        }
+      }
+    }
+  `;
+
+    this.setState({
+      query
+    });
+  }
+
+  generateCharacter = () => {
+    const query = gql`
+    {
+      character(id: ${this.randomCharacter()}) {
+        id
+        name
+        image
+        status
+        species
+        location {
+          name
+        }
+        origin {
+          name
+        }
+      }
+    }
+  `;
+
+    this.setState({
+      query
+    });
+  };
+
+  // componentDidUpdate = (prevProps, prevState) => {
+  //   const { character } = this.state;
+  //   if (prevState.character !== character) {
+  //     console.log("Character changed");
+  //   }
+  // };
 
   handleHistorial = e => {
     const { show } = this.state;
@@ -38,70 +101,72 @@ class App extends Component {
     });
   };
 
-  fetchCharacters = async () => {
-    const { characters: charactersState } = this.state;
-    const random = this.randomCharacter();
+  // fetchCharacters = async () => {
+  //   const { characters: charactersState } = this.state;
+  //   const random = this.randomCharacter();
 
-    this.setState({ loading: true });
+  //   this.setState({ loading: true });
 
-    try {
-      const response = await fetch(
-        `https://rickandmortyapi.com/api/character/${random}`
-      );
+  //   try {
+  //     const response = await fetch(
+  //       `https://rickandmortyapi.com/api/character/${random}`
+  //     );
 
-      const character = await response.json();
-      let characters = [...charactersState];
+  //     const character = await response.json();
+  //     let characters = [...charactersState];
 
-      if (!charactersState.find(chara => chara.id === character.id)) {
-        characters = [...charactersState, character];
-      }
-      //Valida que el personaje no exista en la lista de personajes
+  //     if (!charactersState.find(chara => chara.id === character.id)) {
+  //       characters = [...charactersState, character];
+  //     }
+  //     //Valida que el personaje no exista en la lista de personajes
 
-      this.setState({
-        character: character,
-        characters
-      });
-    } catch (error) {
-      this.setState({
-        error
-      });
-    } finally {
-      this.setState({
-        loading: false
-      });
-    }
-  };
+  //     this.setState({
+  //       character: character,
+  //       characters
+  //     });
+  //   } catch (error) {
+  //     this.setState({
+  //       error
+  //     });
+  //   } finally {
+  //     this.setState({
+  //       loading: false
+  //     });
+  //   }
+  // };
 
   render() {
-    const { character, loading, show, characters } = this.state;
+    const { show, characters, query } = this.state;
 
     return (
-      <Fragment>
-        {loading ? (
-          <PageLoading />
-        ) : (
-          <Fragment>
-            <MainContainer>
-              <img src={Logo} alt="logo" width="250" />
-              <Title>Character generator</Title>
-              <HistorialButton onClick={this.handleHistorial}>
-                <img
-                  alt="history button"
-                  src={historialButtonImg}
-                  width="28px"
-                />
-              </HistorialButton>
-              <Character character={character} />
-              <Button onClick={this.fetchCharacters}>Generate</Button>
-            </MainContainer>
-            <Historial
-              show={show}
-              characters={characters}
-              handleHistorial={this.handleHistorial}
-            />
-          </Fragment>
-        )}
-      </Fragment>
+      <Query query={query}>
+        {({ loading, error, data }) => {
+          if (loading) return <PageLoading />;
+          if (error) return "Error";
+          return (
+            <Fragment>
+              <MainContainer>
+                <img src={Logo} alt="logo" width="250" />
+                <Title>Character generator</Title>
+                <HistorialButton onClick={this.handleHistorial}>
+                  <img
+                    alt="history button"
+                    src={historialButtonImg}
+                    width="28px"
+                  />
+                </HistorialButton>
+                <Character character={data.character} />
+                <Button onClick={this.generateCharacter}>Generate</Button>
+              </MainContainer>
+              <Historial
+                show={show}
+                characters={characters}
+                handleHistorial={this.handleHistorial}
+              />
+            </Fragment>
+          );
+        }}
+      </Query>
     );
   }
 }

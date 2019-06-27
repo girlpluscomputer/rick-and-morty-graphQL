@@ -8,7 +8,6 @@ import {
   HistorialCloseButton,
   HistorialItem
 } from "./elements";
-// import "./Historial.css";
 
 function Historial({ show, characters, handleHistorial }) {
   if (!show) {
