@@ -86,3 +86,14 @@ class App extends Component {
 }
 
 export default withApollo(App);
+
+// Random Character
+// Random Location
+// Find Character
+// Find Location
+
+// React Router
+// random-character
+// random-location
+// find-character
+// find-location
