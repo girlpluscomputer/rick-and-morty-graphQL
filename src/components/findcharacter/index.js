@@ -1,88 +1,52 @@
-import React, { Component } from "react";
-import Form from "./components/form";
-import GET_CHARACTER from "./components/form/requests";
-import { async } from "q";
+import React, { Component } from 'react';
+import Form from './components/form';
+import GET_CHARACTER from './requests';
+import { withApollo } from 'react-apollo';
 
 class FindCharacter extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      loading: false,
-      filter: {}
-    };
-  }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.findCharacter();
+  state = {
+    error: false,
+    loading: false,
+    filter: {},
   };
 
-  findCharacter = async () => {
-    const name = document.getElementsByName("name")[0].value;
-    const gender = document.getElementsByName("gender")[0].value;
-    const status = document.getElementsByName("status")[0].value;
+  findCharacter = async e => {
     const { client } = this.props;
-
+    const { filter } = this.state;
+    e.preventDefault();
     this.setState({ loading: true });
 
-    const { data, errors } = await client.query({
+    debugger;
+
+    const { data } = await client.query({
       query: GET_CHARACTER,
-      variables: { name: name, gender: gender, status: status }
+      variables: { filter },
     });
+
+    debugger;
 
     if (data) {
-    } else if (errors) {
+      // blabla bla
+      return;
     }
+
+    this.setState({ error: true });
   };
 
-  handleChangeGender = e => {
+  handleChange = e => {
     const {
-      target: { value }
+      target: { name: key, value },
     } = e;
+    const { filter } = this.state;
 
-    const gender = value;
-
-    this.setState({
-      filter: {
-        gender
-      }
-    });
-  };
-
-  handleChangeStatus = e => {
-    const {
-      target: { value }
-    } = e;
-
-    const status = value;
-
-    this.setState({
-      filter: {
-        status
-      }
-    });
-  };
-  handleChangeName = e => {
-    const {
-      target: { value }
-    } = e;
-
-    const name = value;
-
-    this.setState({
-      filter: {
-        name
-      }
-    });
+    this.setState({ filter: { ...filter, [key]: value } });
   };
 
   render() {
     return (
       <div>
         <Form
-          handleSubmit={this.handleSubmit}
+          handleSubmit={this.findCharacter}
           handleChange={this.handleChange}
         />
       </div>
@@ -90,4 +54,7 @@ class FindCharacter extends Component {
   }
 }
 
-export default FindCharacter;
+export default withApollo(FindCharacter);
+
+// HOC High Order Component
+// withApollo > client > props > FindCharacter

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   FormContainer,
   Container,
@@ -7,8 +7,8 @@ import {
   StyledInput,
   Selector,
   ButtonContainer,
-  Button
-} from "./elements";
+  Button,
+} from './elements';
 
 function Form({ handleSubmit, handleChange }) {
   return (
@@ -23,12 +23,14 @@ function Form({ handleSubmit, handleChange }) {
           onChange={handleChange}
         />
         <Container>
-          <Selector name="status" placeholder="Status">
+          <Selector name="status" placeholder="Status" onChange={handleChange}>
+            <option value="">Selecciona un status</option>
             <option value="alive">Alive</option>
             <option value="dead">Dead</option>
             <option value="unknown">Unknown</option>
           </Selector>
-          <Selector name="gender" placeholder="Gender">
+          <Selector name="gender" placeholder="Gender" onChange={handleChange}>
+            <option value="">Selecciona un genero</option>
             <option value="female">Female</option>
             <option value="male">Male</option>
             <option value="genderless">Genderless</option>
