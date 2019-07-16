@@ -1,14 +1,12 @@
-import styled from 'styled-components';
+import React from "react";
+import { StyledButton, ButtonContainer } from "./elements";
 
-const Button = styled.button`
-	border: none;
-	height: 36px;
-	padding: 0 16px;
-	border-radius: 16px;
-	background-color: #5fc471;
-	color: azure;
-	font-weight: bold;
-	cursor: pointer;
-`;
+function Button({ text, handleClick }) {
+  return (
+    <ButtonContainer>
+      <StyledButton onClick={handleClick}>{text}</StyledButton>
+    </ButtonContainer>
+  );
+}
 
 export default Button;

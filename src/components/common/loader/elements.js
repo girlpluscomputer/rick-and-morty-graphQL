@@ -14,6 +14,7 @@ const LoaderKeyFrames = keyframes`
 const LoaderContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const LoaderItem = styled.div`

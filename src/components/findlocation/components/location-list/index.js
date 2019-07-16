@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   TableContainer,
   StyledBodyTable,
@@ -9,25 +8,25 @@ import {
   StyledCell
 } from "./elements";
 
-function CharacterList({ results }) {
+function LocationList({ results }) {
   return (
     <TableContainer>
       <StyledTable>
         <StyledBodyTable>
           <StyledRow>
             <StyledHeader>Name</StyledHeader>
-            <StyledHeader>Gender</StyledHeader>
-            <StyledHeader>Species</StyledHeader>
-            <StyledHeader>Status</StyledHeader>
+            <StyledHeader>Dimension</StyledHeader>
+            <StyledHeader>Type</StyledHeader>
+            <StyledHeader>Created</StyledHeader>
           </StyledRow>
 
-          {results.map((character, id) => {
+          {results.map((location, id) => {
             return (
               <StyledRow key={id}>
-                <StyledCell>{character.name}</StyledCell>
-                <StyledCell>{character.gender}</StyledCell>
-                <StyledCell>{character.species}</StyledCell>
-                <StyledCell>{character.status}</StyledCell>
+                <StyledCell>{location.name}</StyledCell>
+                <StyledCell>{location.dimension}</StyledCell>
+                <StyledCell>{location.type}</StyledCell>
+                <StyledCell>{location.created}</StyledCell>
               </StyledRow>
             );
           })}
@@ -37,4 +36,4 @@ function CharacterList({ results }) {
   );
 }
 
-export default CharacterList;
+export default LocationList;

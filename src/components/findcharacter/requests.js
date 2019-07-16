@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 const GET_CHARACTER = gql`
   query findCharacter($filter: FilterCharacter!) {
@@ -7,6 +7,7 @@ const GET_CHARACTER = gql`
         name
         status
         gender
+        species
       }
     }
   }

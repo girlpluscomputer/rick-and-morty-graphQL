@@ -1,32 +1,43 @@
-import React, { Component } from 'react';
-import Form from './components/form';
-import GET_CHARACTER from './requests';
-import { withApollo } from 'react-apollo';
+import React, { Component } from "react";
+import Form from "./components/form";
+import Loader from "../common/loader";
+import CharacterList from "./components/character-list";
+import GET_CHARACTER from "./requests";
+import { withApollo } from "react-apollo";
+import NoResults from "./elements";
 
 class FindCharacter extends Component {
-  state = {
-    error: false,
-    loading: false,
-    filter: {},
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: false,
+      loading: false,
+      filter: {},
+      results: []
+    };
+  }
 
-  findCharacter = async e => {
+  handleSubmit = async e => {
     const { client } = this.props;
     const { filter } = this.state;
-    e.preventDefault();
-    this.setState({ loading: true });
 
-    debugger;
+    e.preventDefault();
+
+    this.setState({
+      loading: true
+    });
 
     const { data } = await client.query({
       query: GET_CHARACTER,
-      variables: { filter },
+      variables: { filter }
     });
 
-    debugger;
-
     if (data) {
-      // blabla bla
+      const { results } = data.characters;
+      this.setState({
+        results,
+        loading: false
+      });
       return;
     }
 
@@ -35,7 +46,7 @@ class FindCharacter extends Component {
 
   handleChange = e => {
     const {
-      target: { name: key, value },
+      target: { name: key, value }
     } = e;
     const { filter } = this.state;
 
@@ -43,18 +54,29 @@ class FindCharacter extends Component {
   };
 
   render() {
+    const { results, loading } = this.state;
+    let renderComponent;
+
+    if (results !== null) {
+      if (results.length > 0) {
+        renderComponent = <CharacterList results={results} />;
+      }
+    } else if (loading) {
+      renderComponent = <Loader />;
+    } else {
+      renderComponent = <NoResults>No results</NoResults>;
+    }
+
     return (
       <div>
         <Form
-          handleSubmit={this.findCharacter}
+          handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
+        {renderComponent}
       </div>
     );
   }
 }
 
 export default withApollo(FindCharacter);
-
-// HOC High Order Component
-// withApollo > client > props > FindCharacter

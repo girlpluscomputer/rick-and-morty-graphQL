@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { NavbarContainer, LogoContainer, Item } from "../navbar/elements";
 import Logo from "../../img/rick-and-morty.png";
 import StyledLink from "./StyledLink";
@@ -8,9 +7,7 @@ function Navbar() {
   return (
     <div>
       <LogoContainer>
-        <Link to="/">
-          <img src={Logo} alt="logo" width="200" />
-        </Link>
+        <img src={Logo} alt="logo" width="200" />
       </LogoContainer>
       <NavbarContainer>
         <Item>
