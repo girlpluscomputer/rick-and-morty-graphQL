@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { Fragment } from "react";
-import FormCharacter from "./components/form";
-import NoResults from "../common/noresults";
-import CharacterList from "./components/character-list";
-import GET_CHARACTER from "./requests";
-import { withApollo } from "react-apollo";
+import React, { Component, Fragment } from 'react';
+
+import NoResults from '../common/noresults';
+
+import FormCharacter from './components/form';
+import CharacterList from './components/character-list';
+import GET_CHARACTER from './requests';
+import { withApollo } from 'react-apollo';
 
 class FindCharacter extends Component {
   state = {
     error: false,
     loading: false,
     filter: {},
-    results: []
+    results: [],
   };
 
   handleSubmit = async e => {
@@ -21,19 +22,19 @@ class FindCharacter extends Component {
     e.preventDefault();
 
     this.setState({
-      loading: true
+      loading: true,
     });
 
     const { data } = await client.query({
       query: GET_CHARACTER,
-      variables: { filter }
+      variables: { filter },
     });
 
     if (data) {
       const { results } = data.characters;
       this.setState({
         results,
-        loading: false
+        loading: false,
       });
       return;
     }
@@ -43,7 +44,7 @@ class FindCharacter extends Component {
 
   handleChange = e => {
     const {
-      target: { name: key, value }
+      target: { name: key, value },
     } = e;
     const { filter } = this.state;
 
@@ -54,10 +55,7 @@ class FindCharacter extends Component {
     const { results, loading } = this.state;
     return (
       <Fragment>
-        <FormCharacter
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
-        />
+        <FormCharacter handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
         {results === null ? (
           <NoResults>no data</NoResults>
         ) : (

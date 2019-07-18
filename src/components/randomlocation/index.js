@@ -1,12 +1,10 @@
-import React, { Component } from "react";
-import { withApollo } from "react-apollo";
-import { Fragment } from "react";
-import CardLocation from "../common/card-location";
-import Button from "../common/button";
-import HistorialButton from "../common/historial-button";
-import Historial from "../common/historial";
-import GET_RANDOM_LOCATION from "./requests";
-import Loader from "../common/loader";
+import React, { Component, Fragment } from 'react';
+import { withApollo } from 'react-apollo';
+import CardLocation from '../common/card-location';
+import Button from '../common/button';
+import HistorialButton from '../common/historial-button';
+import Historial from '../common/historial';
+import GET_RANDOM_LOCATION from './requests';
 
 class RandomLocation extends Component {
   state = {
@@ -14,33 +12,31 @@ class RandomLocation extends Component {
     loading: false,
     error: false,
     data: {},
-    locations: []
+    locations: [],
   };
 
-  componentDidMount() {
-    this.fetchLocations();
-  }
+  componentDidMount = () => this.fetchLocations();
 
-  randomLocation() {
-    return Math.floor(Math.random() * (76 - 1) + 1);
-  }
+  randomLocation = () => Math.floor(Math.random() * (76 - 1) + 1);
+
   handleHistorial = e => {
     const { show } = this.state;
     this.setState({
-      show: !show
+      show: !show,
     });
   };
+
   fetchLocations = async e => {
     const { client } = this.props;
     const { locations: locationsState } = this.state;
 
     this.setState({
-      loading: true
+      loading: true,
     });
 
     const { data } = await client.query({
       query: GET_RANDOM_LOCATION,
-      variables: { random: this.randomLocation() }
+      variables: { random: this.randomLocation() },
     });
 
     if (data) {
@@ -50,10 +46,11 @@ class RandomLocation extends Component {
       if (!locationsState.find(loc => loc.id === location.id)) {
         locations = [...locationsState, location];
       }
+
       this.setState({
         data,
         loading: false,
-        locations
+        locations,
       });
       return;
     }
@@ -67,11 +64,7 @@ class RandomLocation extends Component {
         <CardLocation data={data} loading={loading} />
         <Button text="Generate" handleClick={this.fetchLocations} />
         <HistorialButton handleHistorial={this.handleHistorial} />
-        <Historial
-          show={show}
-          data={locations}
-          handleHistorial={this.handleHistorial}
-        />
+        <Historial show={show} data={locations} handleHistorial={this.handleHistorial} />
       </Fragment>
     );
   }

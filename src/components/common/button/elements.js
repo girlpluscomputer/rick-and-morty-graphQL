@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledButton = styled.button`
   border: none;
@@ -10,8 +10,9 @@ const StyledButton = styled.button`
   font-weight: bold;
   cursor: pointer;
 `;
+
 const ButtonContainer = styled.div`
-  heigth: 36px;
+  height: 36px;
   width: 100%;
   position: absolute;
   top: 550px;
@@ -19,4 +20,5 @@ const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 export { StyledButton, ButtonContainer };

@@ -1,9 +1,8 @@
-import React from "react";
-import { Fragment } from "react";
-import { withRouter } from "react-router";
-import { NavbarContainer, LogoContainer } from "../navbar/elements";
-import Logo from "../../img/rick-and-morty.png";
-import StyledLink from "./StyledLink";
+import React from 'react';
+import { Fragment } from 'react';
+import { withRouter, Link } from 'react-router-dom';
+import { NavbarContainer, LogoContainer, StyledLink } from '../navbar/elements';
+import Logo from '../../img/rick-and-morty.png';
 
 function Navbar(props) {
   const activeRoute = props.location.pathname;
@@ -13,30 +12,19 @@ function Navbar(props) {
         <img src={Logo} alt="logo" width="200" />
       </LogoContainer>
       <NavbarContainer>
-        <StyledLink
-          to="/find-character"
-          active={activeRoute === "/find-character" ? "active" : ""}
-        >
-          Find character
-        </StyledLink>
-        <StyledLink
-          to="/find-location"
-          active={activeRoute === "/find-location" ? "active" : ""}
-        >
-          Find location
-        </StyledLink>
-        <StyledLink
-          to="/random-character"
-          active={activeRoute === "/random-character" ? "active" : ""}
-        >
-          Random character
-        </StyledLink>
-        <StyledLink
-          to="/random-location"
-          active={activeRoute === "/random-location" ? "active" : ""}
-        >
-          Random location
-        </StyledLink>
+        <Link to="/find-character">
+          <StyledLink active={activeRoute === '/find-character'}>Find character</StyledLink>
+        </Link>
+        <Link to="/find-location">
+          <StyledLink active={activeRoute === '/find-location'}>Find location</StyledLink>
+        </Link>
+
+        <Link to="/random-character">
+          <StyledLink active={activeRoute === '/random-character'}>Random character</StyledLink>
+        </Link>
+        <Link to="/random-location">
+          <StyledLink active={activeRoute === '/random-location'}>Random location</StyledLink>
+        </Link>
       </NavbarContainer>
     </Fragment>
   );

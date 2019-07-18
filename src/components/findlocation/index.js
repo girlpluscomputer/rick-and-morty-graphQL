@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { withApollo } from "react-apollo";
-import { Fragment } from "react";
-import GET_LOCATION from "./requests";
-import FormLocation from "./components/form";
-import LocationList from "./components/location-list";
-import NoResults from "../common/noresults";
+import React, { Component, Fragment } from 'react';
+import { withApollo } from 'react-apollo';
+
+import GET_LOCATION from './requests';
+import FormLocation from './components/form';
+import LocationList from './components/location-list';
+import NoResults from '../common/noresults';
 
 class FindLocation extends Component {
   state = {
     loading: false,
     error: false,
     filter: {},
-    results: []
+    results: [],
   };
 
   handleSubmit = async e => {
@@ -21,19 +21,19 @@ class FindLocation extends Component {
     e.preventDefault();
 
     this.setState({
-      loading: true
+      loading: true,
     });
 
     const { data } = await client.query({
       query: GET_LOCATION,
-      variables: { filter }
+      variables: { filter },
     });
 
     if (data) {
       const { results } = data.locations;
       this.setState({
         results,
-        loading: false
+        loading: false,
       });
       return;
     }
@@ -43,7 +43,7 @@ class FindLocation extends Component {
 
   handleChange = e => {
     const {
-      target: { name: key, value }
+      target: { name: key, value },
     } = e;
     const { filter } = this.state;
 
@@ -55,10 +55,7 @@ class FindLocation extends Component {
 
     return (
       <Fragment>
-        <FormLocation
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
-        />
+        <FormLocation handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
         {results === null ? (
           <NoResults>no data</NoResults>
         ) : (
