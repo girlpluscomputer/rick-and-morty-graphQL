@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import { withApollo } from "react-apollo";
 import { Fragment } from "react";
-import Card from "../common/card";
+import CardCharacter from "../common/card-character";
 import Button from "../common/button";
 import HistorialButton from "../common/historial-button";
+import Historial from "../common/historial";
 import GET_RANDOM_CHARACTER from "./request";
+import Loader from "../common/loader";
 
 class RandomCharacter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: false,
-      loading: false,
-      error: false,
-      data: {}
-    };
-  }
+  state = {
+    show: false,
+    loading: false,
+    error: false,
+    data: {},
+    characters: []
+  };
 
   componentDidMount() {
     this.fetchCharacters();
@@ -25,8 +25,16 @@ class RandomCharacter extends Component {
     return Math.floor(Math.random() * (493 - 1) + 1);
   }
 
+  handleHistorial = e => {
+    const { show } = this.state;
+    this.setState({
+      show: !show
+    });
+  };
+
   fetchCharacters = async e => {
     const { client } = this.props;
+    const { characters: charactersState } = this.state;
 
     this.setState({
       loading: true
@@ -38,21 +46,35 @@ class RandomCharacter extends Component {
     });
 
     if (data) {
+      const { character } = data;
+      let characters = [...charactersState];
+
+      if (!charactersState.find(chara => chara.id === character.id)) {
+        characters = [...charactersState, character];
+      }
       this.setState({
         data: data,
-        loading: false
+        loading: false,
+        characters
       });
+
       return;
     }
   };
 
   render() {
-    const { data } = this.state;
+    const { data, show, characters, loading } = this.state;
 
     return (
       <Fragment>
-        {Object.keys(data).length && <Card data={data} />}
+        <CardCharacter data={data} loading={loading} />
         <Button text="Generate" handleClick={this.fetchCharacters} />
+        <HistorialButton handleHistorial={this.handleHistorial} />
+        <Historial
+          show={show}
+          data={characters}
+          handleHistorial={this.handleHistorial}
+        />
       </Fragment>
     );
   }

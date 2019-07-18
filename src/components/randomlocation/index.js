@@ -3,30 +3,36 @@ import { withApollo } from "react-apollo";
 import { Fragment } from "react";
 import CardLocation from "../common/card-location";
 import Button from "../common/button";
+import HistorialButton from "../common/historial-button";
+import Historial from "../common/historial";
 import GET_RANDOM_LOCATION from "./requests";
 import Loader from "../common/loader";
 
 class RandomLocation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: false,
-      loading: false,
-      error: false,
-      data: {}
-    };
-  }
+  state = {
+    show: false,
+    loading: false,
+    error: false,
+    data: {},
+    locations: []
+  };
 
   componentDidMount() {
     this.fetchLocations();
   }
 
   randomLocation() {
-    return Math.floor(Math.random() * (493 - 1) + 1);
+    return Math.floor(Math.random() * (76 - 1) + 1);
   }
-
+  handleHistorial = e => {
+    const { show } = this.state;
+    this.setState({
+      show: !show
+    });
+  };
   fetchLocations = async e => {
     const { client } = this.props;
+    const { locations: locationsState } = this.state;
 
     this.setState({
       loading: true
@@ -38,21 +44,34 @@ class RandomLocation extends Component {
     });
 
     if (data) {
+      const { location } = data;
+      let locations = [...locationsState];
+
+      if (!locationsState.find(loc => loc.id === location.id)) {
+        locations = [...locationsState, location];
+      }
       this.setState({
         data,
-        loading: false
+        loading: false,
+        locations
       });
       return;
     }
   };
 
   render() {
-    const { data } = this.state;
+    const { data, show, locations, loading } = this.state;
 
     return (
       <Fragment>
-        {Object.keys(data).length && <CardLocation data={data} />}
+        <CardLocation data={data} loading={loading} />
         <Button text="Generate" handleClick={this.fetchLocations} />
+        <HistorialButton handleHistorial={this.handleHistorial} />
+        <Historial
+          show={show}
+          data={locations}
+          handleHistorial={this.handleHistorial}
+        />
       </Fragment>
     );
   }

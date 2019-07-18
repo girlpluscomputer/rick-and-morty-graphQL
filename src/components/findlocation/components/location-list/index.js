@@ -1,4 +1,6 @@
 import React from "react";
+import Loader from "../../../common/loader";
+import { Fragment } from "react";
 import {
   TableContainer,
   StyledBodyTable,
@@ -8,31 +10,38 @@ import {
   StyledCell
 } from "./elements";
 
-function LocationList({ results }) {
+function LocationList({ results, loading }) {
+  if (loading) {
+    return <Loader />;
+  }
   return (
-    <TableContainer>
-      <StyledTable>
-        <StyledBodyTable>
-          <StyledRow>
-            <StyledHeader>Name</StyledHeader>
-            <StyledHeader>Dimension</StyledHeader>
-            <StyledHeader>Type</StyledHeader>
-            <StyledHeader>Created</StyledHeader>
-          </StyledRow>
-
-          {results.map((location, id) => {
-            return (
-              <StyledRow key={id}>
-                <StyledCell>{location.name}</StyledCell>
-                <StyledCell>{location.dimension}</StyledCell>
-                <StyledCell>{location.type}</StyledCell>
-                <StyledCell>{location.created}</StyledCell>
+    <Fragment>
+      {Object.keys(results).length > 0 && (
+        <TableContainer>
+          <StyledTable>
+            <StyledBodyTable>
+              <StyledRow>
+                <StyledHeader>Name</StyledHeader>
+                <StyledHeader>Dimension</StyledHeader>
+                <StyledHeader>Type</StyledHeader>
+                <StyledHeader>Created</StyledHeader>
               </StyledRow>
-            );
-          })}
-        </StyledBodyTable>
-      </StyledTable>
-    </TableContainer>
+
+              {results.map((location, id) => {
+                return (
+                  <StyledRow key={id}>
+                    <StyledCell>{location.name}</StyledCell>
+                    <StyledCell>{location.dimension}</StyledCell>
+                    <StyledCell>{location.type}</StyledCell>
+                    <StyledCell>{location.created}</StyledCell>
+                  </StyledRow>
+                );
+              })}
+            </StyledBodyTable>
+          </StyledTable>
+        </TableContainer>
+      )}
+    </Fragment>
   );
 }
 

@@ -1,21 +1,18 @@
 import React, { Component } from "react";
 import { withApollo } from "react-apollo";
+import { Fragment } from "react";
 import GET_LOCATION from "./requests";
-import Form from "./components/form";
+import FormLocation from "./components/form";
 import LocationList from "./components/location-list";
-import Loader from "../common/loader";
 import NoResults from "../common/noresults";
 
 class FindLocation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-      error: false,
-      filter: {},
-      results: []
-    };
-  }
+  state = {
+    loading: false,
+    error: false,
+    filter: {},
+    results: []
+  };
 
   handleSubmit = async e => {
     const { client } = this.props;
@@ -55,26 +52,19 @@ class FindLocation extends Component {
 
   render() {
     const { results, loading } = this.state;
-    let renderComponent;
-
-    if (results !== null) {
-      if (results.length > 0) {
-        renderComponent = <LocationList results={results} />;
-      }
-    } else if (loading) {
-      renderComponent = <Loader />;
-    } else {
-      renderComponent = <NoResults>No results</NoResults>;
-    }
 
     return (
-      <div>
-        <Form
+      <Fragment>
+        <FormLocation
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        {renderComponent}
-      </div>
+        {results === null ? (
+          <NoResults>no data</NoResults>
+        ) : (
+          <LocationList results={results} loading={loading} />
+        )}
+      </Fragment>
     );
   }
 }

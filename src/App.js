@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { Fragment } from "react";
 import { withApollo } from "react-apollo";
 import FindCharacter from "./components/findcharacter";
@@ -10,7 +10,7 @@ import Navbar from "./components/common/navbar";
 import Header from "./elements";
 
 function App(props) {
-  const { client } = props.client;
+  const { client } = props;
   return (
     <Fragment>
       <Header>
@@ -34,6 +34,7 @@ function App(props) {
           component={RandomLocation}
           client={client}
         />
+        <Redirect from="/" to="/find-character" />
       </Switch>
     </Fragment>
   );

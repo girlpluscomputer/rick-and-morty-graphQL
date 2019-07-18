@@ -10,7 +10,7 @@ import {
   Button
 } from "./elements";
 
-function Form({ handleSubmit, handleChange }) {
+function FormCharacter({ handleSubmit, handleChange }) {
   return (
     <FormContainer>
       <StyledForm onSubmit={handleSubmit}>
@@ -45,4 +45,4 @@ function Form({ handleSubmit, handleChange }) {
   );
 }
 
-export default Form;
+export default FormCharacter;

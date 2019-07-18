@@ -18,20 +18,4 @@ const LogoContainer = styled.div`
   align-items: center;
 `;
 
-const Item = styled.div`
-  width: 180px;
-  height: 100%;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  cursor: pointer;
-
-  &:hover{
-    border-bottom 4px solid #fff;
-  }
-
-`;
-
-export { NavbarContainer, LogoContainer, Item };
+export { NavbarContainer, LogoContainer };

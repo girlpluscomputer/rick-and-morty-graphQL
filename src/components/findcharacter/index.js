@@ -1,25 +1,22 @@
 import React, { Component } from "react";
-import Form from "./components/form";
-import Loader from "../common/loader";
+import { Fragment } from "react";
+import FormCharacter from "./components/form";
+import NoResults from "../common/noresults";
 import CharacterList from "./components/character-list";
 import GET_CHARACTER from "./requests";
 import { withApollo } from "react-apollo";
-import NoResults from "./elements";
 
 class FindCharacter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: false,
-      loading: false,
-      filter: {},
-      results: []
-    };
-  }
+  state = {
+    error: false,
+    loading: false,
+    filter: {},
+    results: []
+  };
 
   handleSubmit = async e => {
-    const { client } = this.props;
     const { filter } = this.state;
+    const { client } = this.props;
 
     e.preventDefault();
 
@@ -55,26 +52,18 @@ class FindCharacter extends Component {
 
   render() {
     const { results, loading } = this.state;
-    let renderComponent;
-
-    if (results !== null) {
-      if (results.length > 0) {
-        renderComponent = <CharacterList results={results} />;
-      }
-    } else if (loading) {
-      renderComponent = <Loader />;
-    } else {
-      renderComponent = <NoResults>No results</NoResults>;
-    }
-
     return (
-      <div>
-        <Form
+      <Fragment>
+        <FormCharacter
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        {renderComponent}
-      </div>
+        {results === null ? (
+          <NoResults>no data</NoResults>
+        ) : (
+          <CharacterList results={results} loading={loading} />
+        )}
+      </Fragment>
     );
   }
 }

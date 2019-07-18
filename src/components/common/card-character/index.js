@@ -5,14 +5,15 @@ import {
   LoaderContainer,
   CardContainer,
   StyledCard,
+  CardImage,
   CardDescription,
   Data,
   Label,
   Item
 } from "./elements";
 
-function CardLocation({ data, loading }) {
-  const { location } = data;
+function CardCharacter({ data, loading }) {
+  const { character } = data;
 
   if (loading) {
     return (
@@ -28,23 +29,28 @@ function CardLocation({ data, loading }) {
     <Fragment>
       {Object.keys(data).length > 0 && (
         <CardContainer>
-          <StyledCard>
+          <StyledCard id={character.id}>
+            <CardImage alt="character" src={character.image} />
             <CardDescription>
               <Item>
                 <Label>Name: </Label>
-                <Data>{location.name}</Data>
+                <Data>{character.name}</Data>
               </Item>
               <Item>
-                <Label>Type: </Label>
-                <Data>{location.type}</Data>
+                <Label>Status: </Label>
+                <Data>{character.status}</Data>
               </Item>
               <Item>
-                <Label>Dimension: </Label>
-                <Data>{location.dimension}</Data>
+                <Label>Specie: </Label>
+                <Data>{character.species}</Data>
               </Item>
               <Item>
-                <Label>Created: </Label>
-                <Data>{location.created}</Data>
+                <Label>Origin: </Label>
+                <Data>{character.origin.name}</Data>
+              </Item>
+              <Item>
+                <Label>Location: </Label>
+                <Data>{character.location.name}</Data>
               </Item>
             </CardDescription>
           </StyledCard>
@@ -54,4 +60,4 @@ function CardLocation({ data, loading }) {
   );
 }
 
-export default CardLocation;
+export default CardCharacter;

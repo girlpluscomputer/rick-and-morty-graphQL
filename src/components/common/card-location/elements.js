@@ -1,9 +1,17 @@
 import styled from "styled-components";
 
+const LoaderContainer = styled.div`
+  width: 600px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const CardContainer = styled.div`
   width: 100vw;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: row;
   padding: 40px 0;
   font-family: "Roboto", sans-serif;
@@ -26,12 +34,6 @@ const CardDescription = styled.div`
   border-radius: 16px;
 `;
 
-const CardImage = styled.img`
-  border-bottom-left-radius: 16px;
-  border-top-left-radius: 16px;
-  width: 300px;
-`;
-
 const Data = styled.h3`
   max-width: 100%;
   font-weight: normal;
@@ -52,9 +54,9 @@ const Item = styled.div`
 `;
 
 export {
+  LoaderContainer,
   CardContainer,
   StyledCard,
-  CardImage,
   CardDescription,
   Data,
   Label,

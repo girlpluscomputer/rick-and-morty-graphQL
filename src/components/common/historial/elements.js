@@ -9,6 +9,17 @@ const HistorialContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   font-family: "Roboto", sans-serif;
   font-size: 14px;
+  z-index: 3;
+`;
+
+const LeftContainer = styled.div`
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const HistorialSidebar = styled.div`
@@ -19,6 +30,7 @@ const HistorialSidebar = styled.div`
   right: 0;
   width: 460px;
   background-color: #fff;
+  z-index: 1;
 `;
 
 const HistorialContent = styled.div`
@@ -42,7 +54,7 @@ const HistorialCloseButton = styled.button`
   padding: 0 16px;
   height: 36px;
   font-weight: bold;
-  color: tomato;
+  color: #00b0c8;
   background-color: #fff;
 `;
 
@@ -54,6 +66,7 @@ const HistorialItem = styled.div`
 
 export {
   HistorialContainer,
+  LeftContainer,
   HistorialSidebar,
   HistorialContent,
   ButtonContainer,

@@ -2,6 +2,7 @@ import ReactDOM from "react-dom";
 import React, { Fragment } from "react";
 import {
   HistorialContainer,
+  LeftContainer,
   HistorialSidebar,
   HistorialContent,
   ButtonContainer,
@@ -9,27 +10,23 @@ import {
   HistorialItem
 } from "./elements";
 
-function Historial({ show, characters, handleHistorial }) {
+function Historial({ show, data, handleHistorial }) {
   if (!show) {
     return null;
   }
 
   return ReactDOM.createPortal(
     <HistorialContainer>
-      <HistorialSidebar className="historial-sidebar">
-        <HistorialContent className="historial-content">
+      <LeftContainer onClick={handleHistorial} />
+      <HistorialSidebar>
+        <HistorialContent>
           <Fragment>
-            {characters.map((character, index) => (
-              <HistorialItem className="historial-item" key={index}>
-                {character.name}
-              </HistorialItem>
+            {data.map((item, index) => (
+              <HistorialItem key={index}>{item.name}</HistorialItem>
             ))}
           </Fragment>
-          <ButtonContainer className="button-container">
-            <HistorialCloseButton
-              className="historial-close-button"
-              onClick={handleHistorial}
-            >
+          <ButtonContainer>
+            <HistorialCloseButton onClick={handleHistorial}>
               CLOSE
             </HistorialCloseButton>
           </ButtonContainer>

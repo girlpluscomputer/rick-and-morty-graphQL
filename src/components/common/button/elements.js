@@ -8,14 +8,15 @@ const StyledButton = styled.button`
   background-color: #5fc471;
   color: azure;
   font-weight: bold;
-  
+  cursor: pointer;
 `;
 const ButtonContainer = styled.div`
   heigth: 36px;
   width: 100%;
+  position: absolute;
+  top: 550px;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 `;
 export { StyledButton, ButtonContainer };

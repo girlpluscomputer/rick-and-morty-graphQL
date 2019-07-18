@@ -1,30 +1,45 @@
 import React from "react";
-import { NavbarContainer, LogoContainer, Item } from "../navbar/elements";
+import { Fragment } from "react";
+import { withRouter } from "react-router";
+import { NavbarContainer, LogoContainer } from "../navbar/elements";
 import Logo from "../../img/rick-and-morty.png";
 import StyledLink from "./StyledLink";
 
-function Navbar() {
+function Navbar(props) {
+  const activeRoute = props.location.pathname;
   return (
-    <div>
+    <Fragment>
       <LogoContainer>
         <img src={Logo} alt="logo" width="200" />
       </LogoContainer>
       <NavbarContainer>
-        <Item>
-          <StyledLink to="/find-character">Find character</StyledLink>
-        </Item>
-        <Item>
-          <StyledLink to="/find-location">Find location</StyledLink>
-        </Item>
-        <Item>
-          <StyledLink to="/random-character">Random character</StyledLink>
-        </Item>
-        <Item>
-          <StyledLink to="/random-location">Random location</StyledLink>
-        </Item>
+        <StyledLink
+          to="/find-character"
+          active={activeRoute === "/find-character" ? "active" : ""}
+        >
+          Find character
+        </StyledLink>
+        <StyledLink
+          to="/find-location"
+          active={activeRoute === "/find-location" ? "active" : ""}
+        >
+          Find location
+        </StyledLink>
+        <StyledLink
+          to="/random-character"
+          active={activeRoute === "/random-character" ? "active" : ""}
+        >
+          Random character
+        </StyledLink>
+        <StyledLink
+          to="/random-location"
+          active={activeRoute === "/random-location" ? "active" : ""}
+        >
+          Random location
+        </StyledLink>
       </NavbarContainer>
-    </div>
+    </Fragment>
   );
 }
 
-export default Navbar;
+export default withRouter(Navbar);
