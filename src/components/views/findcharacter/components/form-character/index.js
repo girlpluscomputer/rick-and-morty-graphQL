@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   FormContainer,
   Container,
@@ -48,6 +49,11 @@ const FormCharacter = ({ handleSubmit, handleChange }) => {
       </StyledForm>
     </FormContainer>
   );
+};
+
+FormCharacter.propTypes = {
+  handleSubmit: PropTypes.func,
+  handleChange: PropTypes.func
 };
 
 export default FormCharacter;

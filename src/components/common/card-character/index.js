@@ -1,5 +1,6 @@
 import React from "react";
 import { Fragment } from "react";
+import PropTypes from "prop-types";
 import {
   LoaderContainer,
   CardContainer,
@@ -58,6 +59,11 @@ const CardCharacter = ({ data, loading }) => {
       )}
     </Fragment>
   );
+};
+
+CardCharacter.propTypes = {
+  data: PropTypes.object,
+  loading: PropTypes.bool
 };
 
 export default CardCharacter;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Fragment } from "react";
 import {
   TableContainer,
@@ -43,6 +44,11 @@ const LocationList = ({ results, loading }) => {
       )}
     </Fragment>
   );
+};
+
+LocationList.propTypes = {
+  loading: PropTypes.bool,
+  results: PropTypes.object
 };
 
 export default LocationList;

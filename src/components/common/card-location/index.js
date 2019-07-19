@@ -1,5 +1,6 @@
 import React from "react";
 import { Fragment } from "react";
+import PropTypes from "prop-types";
 import {
   LoaderContainer,
   CardContainer,
@@ -52,6 +53,11 @@ const CardLocation = ({ data, loading }) => {
       )}
     </Fragment>
   );
+};
+
+CardLocation.propTypes = {
+  data: PropTypes.object,
+  loading: PropTypes.bool
 };
 
 export default CardLocation;

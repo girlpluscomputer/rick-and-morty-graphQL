@@ -1,11 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Fragment } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
+
 import { NavbarContainer, LogoContainer, StyledLink } from "../navbar/elements";
 import Logo from "../../../img/rick-and-morty.png";
-
-//Prop types
 
 const Navbar = ({ location }) => {
   const activeRoute = location.pathname;
@@ -41,6 +41,10 @@ const Navbar = ({ location }) => {
       </NavbarContainer>
     </Fragment>
   );
+};
+
+Navbar.propTypes = {
+  location: PropTypes.object
 };
 
 export default withRouter(Navbar);

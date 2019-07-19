@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom";
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import {
   HistorialContainer,
   LeftContainer,
@@ -35,6 +36,12 @@ const Historial = ({ show, data, handleHistorial }) => {
     </HistorialContainer>,
     document.getElementById("historial")
   );
+};
+
+Historial.propTypes = {
+  show: PropTypes.bool,
+  data: PropTypes.object,
+  handleHistorial: PropTypes.func
 };
 
 export default Historial;

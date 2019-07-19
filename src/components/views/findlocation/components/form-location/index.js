@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormContainer, StyledForm, Label, StyledInput } from "./elements";
 import Button from "../../../../common/button";
 
@@ -25,6 +26,11 @@ const FormLocation = ({ handleSubmit, handleChange }) => {
       </StyledForm>
     </FormContainer>
   );
+};
+
+FormLocation.propTypes = {
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func
 };
 
 export default FormLocation;

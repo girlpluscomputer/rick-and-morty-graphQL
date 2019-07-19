@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import RoundButton from "./elements";
 
 const HistorialButton = ({ handleHistorial }) => {
@@ -20,6 +21,10 @@ const HistorialButton = ({ handleHistorial }) => {
       </svg>
     </RoundButton>
   );
+};
+
+HistorialButton.propTypes = {
+  handleHistorial: PropTypes.func
 };
 
 export default HistorialButton;

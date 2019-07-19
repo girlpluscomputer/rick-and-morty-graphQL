@@ -1,5 +1,6 @@
 import React from "react";
 import { Fragment } from "react";
+import PropTypes from "prop-types";
 import {
   TableContainer,
   StyledBodyTable,
@@ -43,6 +44,11 @@ const CharacterList = ({ results, loading }) => {
       )}
     </Fragment>
   );
+};
+
+CharacterList.propTypes = {
+  results: PropTypes.object,
+  loading: PropTypes.bool
 };
 
 export default CharacterList;
