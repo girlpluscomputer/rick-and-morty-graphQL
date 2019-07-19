@@ -1,6 +1,6 @@
 import React from "react";
-import Loader from "../loader";
 import PageLoadingContainer from "./elements";
+import Loader from "../loader";
 
 const PageLoading = () => {
   return (

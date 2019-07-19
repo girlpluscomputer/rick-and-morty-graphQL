@@ -1,5 +1,4 @@
 import React from "react";
-import Loader from "../../common/loader";
 import { Fragment } from "react";
 import {
   LoaderContainer,
@@ -10,8 +9,9 @@ import {
   Label,
   Item
 } from "./elements";
+import Loader from "../../common/loader";
 
-function CardLocation({ data, loading }) {
+const CardLocation = ({ data, loading }) => {
   const { location } = data;
 
   if (loading) {
@@ -52,6 +52,6 @@ function CardLocation({ data, loading }) {
       )}
     </Fragment>
   );
-}
+};
 
 export default CardLocation;

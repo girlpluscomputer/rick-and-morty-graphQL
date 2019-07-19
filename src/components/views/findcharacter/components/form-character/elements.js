@@ -4,6 +4,16 @@ const FormContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+const Container = styled.div`
+  width: 100%;
+  height: 76px;
+  padding: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 140px);
+  grid-column-gap: 20px;
+  justify-content: center;
+  justify-items: center;
+`;
 
 const StyledForm = styled.form`
   height: 300px;
@@ -24,7 +34,20 @@ const StyledInput = styled.input`
   height: 36px;
   width: 300px;
   padding: 0 16px;
-  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 2px solid gray;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border: 2px solid #00b0c8;
+  }
+`;
+
+const Selector = styled.select`
+  height: 36px;
+  width: 140px;
+  padding: 0 16px;
   border-radius: 4px;
   border: 2px solid gray;
   cursor: pointer;
@@ -41,26 +64,12 @@ const ButtonContainer = styled.div`
   justify-items: left;
 `;
 
-const Button = styled.button`
-  height: 36px;
-  padding: 0 16px;
-  border-radius: 4px;
-  background-color: #00b0c8;
-  border: none;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #01a8bd;
-  }
-`;
-
 export {
   FormContainer,
+  Container,
   StyledForm,
   Label,
   StyledInput,
-  ButtonContainer,
-  Button
+  Selector,
+  ButtonContainer
 };

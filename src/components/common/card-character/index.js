@@ -1,5 +1,4 @@
 import React from "react";
-import Loader from "../../common/loader";
 import { Fragment } from "react";
 import {
   LoaderContainer,
@@ -11,8 +10,9 @@ import {
   Label,
   Item
 } from "./elements";
+import Loader from "../../common/loader";
 
-function CardCharacter({ data, loading }) {
+const CardCharacter = ({ data, loading }) => {
   const { character } = data;
 
   if (loading) {
@@ -58,6 +58,6 @@ function CardCharacter({ data, loading }) {
       )}
     </Fragment>
   );
-}
+};
 
 export default CardCharacter;

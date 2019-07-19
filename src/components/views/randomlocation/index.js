@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { withApollo } from "react-apollo";
 import { Fragment } from "react";
-import CardLocation from "../common/card-location";
-import Button from "../common/button";
-import HistorialButton from "../common/historial-button";
-import Historial from "../common/historial";
+
 import GET_RANDOM_LOCATION from "./requests";
-import Loader from "../common/loader";
+import Button from "../../common/button";
+import CardLocation from "../../common/card-location";
+import Historial from "../../common/historial";
+import HistorialButton from "../../common/historial-button";
 
 class RandomLocation extends Component {
   state = {
@@ -65,7 +65,14 @@ class RandomLocation extends Component {
     return (
       <Fragment>
         <CardLocation data={data} loading={loading} />
-        <Button text="Generate" handleClick={this.fetchLocations} />
+        <Button
+          bcolor="green"
+          color="white"
+          shape="round"
+          align="center"
+          text="Generate"
+          handleClick={this.fetchLocations}
+        />
         <HistorialButton handleHistorial={this.handleHistorial} />
         <Historial
           show={show}

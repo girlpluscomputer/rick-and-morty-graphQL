@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Fragment } from "react";
-import FormCharacter from "./components/form";
-import NoResults from "../common/noresults";
-import CharacterList from "./components/character-list";
-import GET_CHARACTER from "./requests";
 import { withApollo } from "react-apollo";
+
+import CharacterList from "./components/character-list";
+import FormCharacter from "./components/form-character";
+import GET_CHARACTER from "./requests";
+import NoResults from "../../common/noresults";
 
 class FindCharacter extends Component {
   state = {

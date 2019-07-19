@@ -2,15 +2,15 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Fragment } from "react";
 import { withApollo } from "react-apollo";
-import FindCharacter from "./components/findcharacter";
-import FindLocation from "./components/findlocation";
-import RandomCharacter from "./components/randomcharacter";
-import RandomLocation from "./components/randomlocation";
-import Navbar from "./components/common/navbar";
-import Header from "./elements";
 
-function App(props) {
-  const { client } = props;
+import FindCharacter from "./components/views/findcharacter";
+import FindLocation from "./components/views/findlocation";
+import RandomCharacter from "./components/views/randomcharacter";
+import RandomLocation from "./components/views/randomlocation";
+import Header from "./elements";
+import Navbar from "./components/common/navbar";
+
+const App = ({ client }) => {
   return (
     <Fragment>
       <Header>
@@ -38,6 +38,6 @@ function App(props) {
       </Switch>
     </Fragment>
   );
-}
+};
 
 export default withApollo(App);

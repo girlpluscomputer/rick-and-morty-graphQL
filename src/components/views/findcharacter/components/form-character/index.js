@@ -5,12 +5,11 @@ import {
   StyledForm,
   Label,
   StyledInput,
-  Selector,
-  ButtonContainer,
-  Button
+  Selector
 } from "./elements";
+import Button from "../../../../common/button";
 
-function FormCharacter({ handleSubmit, handleChange }) {
+const FormCharacter = ({ handleSubmit, handleChange }) => {
   return (
     <FormContainer>
       <StyledForm onSubmit={handleSubmit}>
@@ -37,12 +36,18 @@ function FormCharacter({ handleSubmit, handleChange }) {
             <option value="unknown">Unknown</option>
           </Selector>
         </Container>
-        <ButtonContainer>
-          <Button type="submit">Search</Button>
-        </ButtonContainer>
+
+        <Button
+          bcolor="blue"
+          color="white"
+          shape="squared"
+          type="submit"
+          text="Search"
+          align="left"
+        />
       </StyledForm>
     </FormContainer>
   );
-}
+};
 
 export default FormCharacter;

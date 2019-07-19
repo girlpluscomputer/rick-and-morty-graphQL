@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { withApollo } from "react-apollo";
 import { Fragment } from "react";
+
+import FormLocation from "./components/form-location";
 import GET_LOCATION from "./requests";
-import FormLocation from "./components/form";
 import LocationList from "./components/location-list";
-import NoResults from "../common/noresults";
+import NoResults from "../../common/noresults";
 
 class FindLocation extends Component {
   state = {

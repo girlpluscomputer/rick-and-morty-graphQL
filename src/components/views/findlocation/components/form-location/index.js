@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  FormContainer,
-  StyledForm,
-  Label,
-  StyledInput,
-  ButtonContainer,
-  Button
-} from "./elements";
+import { FormContainer, StyledForm, Label, StyledInput } from "./elements";
+import Button from "../../../../common/button";
 
-function FormLocation({ handleSubmit, handleChange }) {
+const FormLocation = ({ handleSubmit, handleChange }) => {
   return (
     <FormContainer>
       <StyledForm onSubmit={handleSubmit}>
@@ -20,12 +14,17 @@ function FormLocation({ handleSubmit, handleChange }) {
           onChange={handleChange}
           placeholder="Example: Earth"
         />
-        <ButtonContainer>
-          <Button type="submit">Search</Button>
-        </ButtonContainer>
+        <Button
+          bcolor="blue"
+          color="white"
+          shape="squared"
+          type="submit"
+          text="Search"
+          align="left"
+        />
       </StyledForm>
     </FormContainer>
   );
-}
+};
 
 export default FormLocation;

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { withApollo } from "react-apollo";
 import { Fragment } from "react";
-import CardCharacter from "../common/card-character";
-import Button from "../common/button";
-import HistorialButton from "../common/historial-button";
-import Historial from "../common/historial";
+
 import GET_RANDOM_CHARACTER from "./request";
-import Loader from "../common/loader";
+import Button from "../../common/button";
+import CardCharacter from "../../common/card-character";
+import Historial from "../../common/historial";
+import HistorialButton from "../../common/historial-button";
 
 class RandomCharacter extends Component {
   state = {
@@ -68,7 +68,14 @@ class RandomCharacter extends Component {
     return (
       <Fragment>
         <CardCharacter data={data} loading={loading} />
-        <Button text="Generate" handleClick={this.fetchCharacters} />
+        <Button
+          bcolor="green"
+          color="white"
+          shape="round"
+          align="center"
+          text="Generate"
+          handleClick={this.fetchCharacters}
+        />
         <HistorialButton handleHistorial={this.handleHistorial} />
         <Historial
           show={show}

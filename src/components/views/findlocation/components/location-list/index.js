@@ -1,5 +1,4 @@
 import React from "react";
-import Loader from "../../../common/loader";
 import { Fragment } from "react";
 import {
   TableContainer,
@@ -9,8 +8,9 @@ import {
   StyledRow,
   StyledCell
 } from "./elements";
+import Loader from "../../../../common/loader";
 
-function LocationList({ results, loading }) {
+const LocationList = ({ results, loading }) => {
   if (loading) {
     return <Loader />;
   }
@@ -43,6 +43,6 @@ function LocationList({ results, loading }) {
       )}
     </Fragment>
   );
-}
+};
 
 export default LocationList;

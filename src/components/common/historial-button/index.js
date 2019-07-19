@@ -1,7 +1,7 @@
 import React from "react";
 import RoundButton from "./elements";
 
-function HistorialButton({ handleHistorial }) {
+const HistorialButton = ({ handleHistorial }) => {
   return (
     <RoundButton onClick={handleHistorial}>
       <svg
@@ -20,6 +20,6 @@ function HistorialButton({ handleHistorial }) {
       </svg>
     </RoundButton>
   );
-}
+};
 
 export default HistorialButton;

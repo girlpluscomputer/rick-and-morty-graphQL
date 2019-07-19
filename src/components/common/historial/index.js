@@ -10,7 +10,7 @@ import {
   HistorialItem
 } from "./elements";
 
-function Historial({ show, data, handleHistorial }) {
+const Historial = ({ show, data, handleHistorial }) => {
   if (!show) {
     return null;
   }
@@ -35,6 +35,6 @@ function Historial({ show, data, handleHistorial }) {
     </HistorialContainer>,
     document.getElementById("historial")
   );
-}
+};
 
 export default Historial;
