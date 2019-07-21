@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { withApollo } from "react-apollo";
 import { Fragment } from "react";
 
-import GET_RANDOM_LOCATION from "./requests";
 import Button from "../../common/button";
 import CardLocation from "../../common/card-location";
 import Historial from "../../common/historial";
 import HistorialButton from "../../common/historial-button";
+
+import GET_RANDOM_LOCATION from "./requests";
 
 class RandomLocation extends Component {
   state = {
@@ -17,19 +18,17 @@ class RandomLocation extends Component {
     locations: []
   };
 
-  componentDidMount() {
-    this.fetchLocations();
-  }
+  componentDidMount = () => this.fetchLocations();
 
-  randomLocation() {
-    return Math.floor(Math.random() * (76 - 1) + 1);
-  }
+  randomLocation = () => Math.floor(Math.random() * (76 - 1) + 1);
+
   handleHistorial = e => {
     const { show } = this.state;
     this.setState({
       show: !show
     });
   };
+
   fetchLocations = async e => {
     const { client } = this.props;
     const { locations: locationsState } = this.state;
@@ -50,6 +49,7 @@ class RandomLocation extends Component {
       if (!locationsState.find(loc => loc.id === location.id)) {
         locations = [...locationsState, location];
       }
+
       this.setState({
         data,
         loading: false,

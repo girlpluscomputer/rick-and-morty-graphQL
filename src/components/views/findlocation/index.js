@@ -3,9 +3,10 @@ import { withApollo } from "react-apollo";
 import { Fragment } from "react";
 
 import FormLocation from "./components/form-location";
-import GET_LOCATION from "./requests";
 import LocationList from "./components/location-list";
 import NoResults from "../../common/noresults";
+
+import GET_LOCATION from "./requests";
 
 class FindLocation extends Component {
   state = {
