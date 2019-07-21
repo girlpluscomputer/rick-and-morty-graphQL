@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { withApollo } from "react-apollo";
 import { Fragment } from "react";
 
-import GET_RANDOM_CHARACTER from "./request";
 import Button from "../../common/button";
 import CardCharacter from "../../common/card-character";
 import Historial from "../../common/historial";
 import HistorialButton from "../../common/historial-button";
+
+import GET_RANDOM_CHARACTER from "./request";
 
 class RandomCharacter extends Component {
   state = {
@@ -17,13 +18,13 @@ class RandomCharacter extends Component {
     characters: []
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.fetchCharacters();
-  }
+  };
 
-  randomCharacter() {
+  randomCharacter = () => {
     return Math.floor(Math.random() * (493 - 1) + 1);
-  }
+  };
 
   handleHistorial = e => {
     const { show } = this.state;
@@ -52,6 +53,7 @@ class RandomCharacter extends Component {
       if (!charactersState.find(chara => chara.id === character.id)) {
         characters = [...charactersState, character];
       }
+
       this.setState({
         data: data,
         loading: false,

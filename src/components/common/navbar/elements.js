@@ -7,6 +7,7 @@ const NavbarContainer = styled.div`
   font-size: 12px;
   margin-top: 20px;
   box-shadow: 0px 10px 10px -15px #111;
+  border-bottom: 1px solid #f2f2f2;
 
   @media only screen and (max-width: 768px) {
     flex-direction: column;
@@ -37,12 +38,11 @@ const StyledLink = styled.div`
   text-decoration: none;
   color: #fff;
 
-  ${props =>
-    props.active &&
-    `
-  border-bottom 4px solid #fff;
-  
-  `}
+  &:hover {
+    border-bottom: 4px solid #fff;
+  }
+
+  ${props => props.active && `border-bottom: 4px solid #fff;`}
 `;
 
 export { NavbarContainer, LogoContainer, StyledLink };

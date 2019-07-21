@@ -1,16 +1,17 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { Fragment } from "react";
 import { withApollo } from "react-apollo";
 
-import FindCharacter from "./components/views/findcharacter";
-import FindLocation from "./components/views/findlocation";
-import RandomCharacter from "./components/views/randomcharacter";
-import RandomLocation from "./components/views/randomlocation";
-import Header from "./elements";
+import FindCharacter from "./components/findcharacter";
+import FindLocation from "./components/findlocation";
+import RandomCharacter from "./components/randomcharacter";
+import RandomLocation from "./components/randomlocation";
 import Navbar from "./components/common/navbar";
+import Header from "./elements";
 
-const App = ({ client }) => {
+function App(props) {
+  const { client } = props;
+
   return (
     <Fragment>
       <Header>
@@ -20,24 +21,24 @@ const App = ({ client }) => {
       <Switch>
         <Route
           path="/find-character"
-          component={FindCharacter}
-          client={client}
+          render={() => <FindCharacter client={client} />}
         />
-        <Route path="/find-location" component={FindLocation} client={client} />
+        <Route
+          path="/find-location"
+          render={() => <FindLocation client={client} />}
+        />
         <Route
           path="/random-character"
-          component={RandomCharacter}
-          client={client}
+          render={() => <RandomCharacter client={client} />}
         />
         <Route
           path="/random-location"
-          component={RandomLocation}
-          client={client}
+          render={() => <RandomLocation client={client} />}
         />
-        <Redirect from="/" to="/find-character" />
+        <Redirect to="/find-character" />
       </Switch>
     </Fragment>
   );
-};
+}
 
 export default withApollo(App);

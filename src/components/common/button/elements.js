@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledButton = styled.button`
   border: none;
@@ -66,4 +66,5 @@ const ButtonContainer = styled.div`
       justify-content: center;
       `}
 `;
+
 export { StyledButton, ButtonContainer };

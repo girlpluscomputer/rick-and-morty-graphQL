@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
-import { withRouter } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import { NavbarContainer, LogoContainer, StyledLink } from "../navbar/elements";
 import Logo from "../../../img/rick-and-morty.png";
