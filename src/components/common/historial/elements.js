@@ -28,7 +28,7 @@ const HistorialSidebar = styled.div`
   left: 100vh - 360px;
   bottom: 0;
   right: 0;
-  width: 460px;
+  width: 65%;
   background-color: #fff;
   z-index: 1;
 `;

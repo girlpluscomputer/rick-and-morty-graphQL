@@ -16,25 +16,41 @@ const CardContainer = styled.div`
   flex-direction: row;
   padding: 40px 0;
   font-family: "Roboto", sans-serif;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledCard = styled.div`
   background-color: #fff;
-  width: 600px;
-  height: 300px;
   border-radius: 16px;
   display: flex;
   flex-direction: row;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const CardImage = styled.img`
   border-bottom-left-radius: 16px;
   border-top-left-radius: 16px;
   width: 300px;
+  height: 300px;
+
+  @media only screen and (max-width: 768px) {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 16px;
+  }
 `;
 
 const CardDescription = styled.div`
+  width: 300px;
+  height: 300px;
   padding: 32px;
   background-color: #fff;
   font-size: 12px;

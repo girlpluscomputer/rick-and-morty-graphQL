@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import {
   TableContainer,
   StyledBodyTable,
-  StyledTable,
   StyledHeader,
   StyledRow,
   StyledCell
@@ -19,27 +18,25 @@ const CharacterList = ({ results, loading }) => {
     <Fragment>
       {Object.keys(results).length > 0 && (
         <TableContainer>
-          <StyledTable>
-            <StyledBodyTable>
-              <StyledRow>
-                <StyledHeader>Name</StyledHeader>
-                <StyledHeader>Gender</StyledHeader>
-                <StyledHeader>Species</StyledHeader>
-                <StyledHeader>Status</StyledHeader>
-              </StyledRow>
+          <StyledBodyTable>
+            <StyledRow>
+              <StyledHeader>Name</StyledHeader>
+              <StyledHeader>Gender</StyledHeader>
+              <StyledHeader>Species</StyledHeader>
+              <StyledHeader>Status</StyledHeader>
+            </StyledRow>
 
-              {results.map((character, id) => {
-                return (
-                  <StyledRow key={id}>
-                    <StyledCell>{character.name}</StyledCell>
-                    <StyledCell>{character.gender}</StyledCell>
-                    <StyledCell>{character.species}</StyledCell>
-                    <StyledCell>{character.status}</StyledCell>
-                  </StyledRow>
-                );
-              })}
-            </StyledBodyTable>
-          </StyledTable>
+            {results.map((character, id) => {
+              return (
+                <StyledRow key={id}>
+                  <StyledCell>{character.name}</StyledCell>
+                  <StyledCell>{character.gender}</StyledCell>
+                  <StyledCell>{character.species}</StyledCell>
+                  <StyledCell>{character.status}</StyledCell>
+                </StyledRow>
+              );
+            })}
+          </StyledBodyTable>
         </TableContainer>
       )}
     </Fragment>
@@ -47,7 +44,7 @@ const CharacterList = ({ results, loading }) => {
 };
 
 CharacterList.propTypes = {
-  results: PropTypes.object,
+  results: PropTypes.array,
   loading: PropTypes.bool
 };
 

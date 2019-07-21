@@ -5,21 +5,12 @@ const TableContainer = styled.div`
   height: 400px;
   display: flex;
   justify-content: center;
-  overflow-y: auto;
-  overflow-x: auto;
+  padding: 0 40px;
+  overflow-x: scroll;
 `;
 
 const StyledBodyTable = styled.tbody`
   border-radius: 4px;
-  display: block;
-`;
-
-const StyledTable = styled.table`
-  border-spacing: 0;
-  width: 100%;
-  margin: 0 40px;
-  display: flex;
-  justify-content: center;
 `;
 
 const StyledHeader = styled.th`
@@ -34,18 +25,11 @@ const StyledRow = styled.tr`
 `;
 
 const StyledCell = styled.td`
-  min-width: 180px;
+  min-width: 80px;
   font-size: 12px;
   padding: 0 16px;
   border-bottom: 1px solid #ddd;
   background-color: #f2f2f2;
 `;
 
-export {
-  TableContainer,
-  StyledBodyTable,
-  StyledTable,
-  StyledHeader,
-  StyledRow,
-  StyledCell
-};
+export { TableContainer, StyledBodyTable, StyledHeader, StyledRow, StyledCell };

@@ -15,12 +15,14 @@ const CardContainer = styled.div`
   flex-direction: row;
   padding: 40px 0;
   font-family: "Roboto", sans-serif;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledCard = styled.div`
   background-color: #fff;
-  width: 600px;
-  height: 300px;
   border-radius: 16px;
   display: flex;
   flex-direction: row;
@@ -29,6 +31,8 @@ const StyledCard = styled.div`
 
 const CardDescription = styled.div`
   padding: 32px;
+  width: 300px;
+  height: 300px;
   background-color: #fff;
   font-size: 12px;
   border-radius: 16px;

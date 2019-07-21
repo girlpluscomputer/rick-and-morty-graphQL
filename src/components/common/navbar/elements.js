@@ -1,20 +1,21 @@
 import styled from "styled-components";
 
 const NavbarContainer = styled.div`
-  width: 100%
-  height: 48px;
+  width: 100%;
   display: flex;
   justify-content: center;
   font-size: 12px;
-  margin-top: 20px
-  border-bottom: 1px solid #f2f2f2;
+  margin-top: 20px;
   box-shadow: 0px 10px 10px -15px #111;
 
-  a{
-    text-decoration: none;
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
   }
 
-
+  a {
+    text-decoration: none;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -27,7 +28,7 @@ const LogoContainer = styled.div`
 const StyledLink = styled.div`
   width: 180px;
   height: 100%;
-  padding: 0 16px;
+  padding: 20px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
